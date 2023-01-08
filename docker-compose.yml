@@ -1,0 +1,29 @@
+version: '3.3'
+services:
+  auth-service:
+    build:
+      context: .
+      dockerfile: auth/Dockerfile
+    container_name: auth-container
+    env_file: auth/.env.local
+    environment:
+      - "DATABASE_URL=mongodb://root:password@mongodb/challengedb?ssl=false&connectTimeoutMS=5000&maxPoolSize=50"
+      - "PORT=3000"
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./auth/src:/usr/src/service/auth/src
+  mongodb:
+      image: mongo
+      container_name: mongo-container
+      environment:
+        - MONGO_INITDB_ROOT_USERNAME=root
+        - MONGO_INITDB_ROOT_PASSWORD=password
+        - MONGO_INITDB_DATABASE=challengedb
+      volumes:
+        - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+

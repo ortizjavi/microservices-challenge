@@ -4,3 +4,4 @@ coverage/
 .vscode/
 build/
 jest*
+pb/

@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package challenge;
+
+///// Auth Service
+
+service AuthService {
+  rpc signIn(SignInInput) returns (SignInOutput) {}
+  rpc signUp(SignUpInput) returns (SignUpOutput) {}
+  rpc getUsers(GetUsersRequest) returns (UsersListResponse) {}
+}
+
+message GetUsersRequest {
+    extend UsersListRequest;
+    required string jwt = 4;
+}
+
+message SignUpInput {
+  string email = 1;
+  string password = 2;
+}
+
+message SignInInput {
+  string email = 1;
+  string password = 2;
+}
+
+message SignUpOutput {
+    string _id = 1;
+}
+
+message SignInOutput {
+    string access_token = 1;
+}
+
+
+///// Business Service
+
+service BusinessService {
+    rpc listUsers (UsersListRequest) returns (UsersListResponse);
+}
+
+
+message UsersListRequest {
+    optional int32 result_per_page = 1 [default = 10];
+    optional int32 page = 2 [default = 1];
+    optional string email = 3;
+}
+
+message UsersListResponse {
+    repeated UserResponse users = 1;
+}
+
+message UserResponse {
+    string _id = 1;
+    string email = 2;
+    int64 dateCreated = 3;
+    int64 dateUpdated = 4;
+}
