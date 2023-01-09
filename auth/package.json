@@ -11,7 +11,7 @@
     "nodemon": "nodemon",
     "test": "jest",
     "db:generate": "npx prisma generate --schema ./src/prisma/schema.prisma",
-    "db:migrate": "npx prisma migrate dev --name user-entity --create-only --schema ./src/prisma/schema.prisma && npm run db:generate",
+    "db:migrate": "npx prisma migrate dev --name user-entity --create-only --schema ./src/prisma/schema.prisma",
     "db:push": "npx prisma db push --schema ./src/prisma/schema.prisma"
   },
   "author": "Javier Ortiz",
@@ -20,10 +20,14 @@
     "@grpc/grpc-js": "^1.8.1",
     "@grpc/proto-loader": "^0.7.4",
     "@prisma/client": "^4.8.1",
-    "add": "^2.0.6"
+    "add": "^2.0.6",
+    "bcrypt": "^5.1.0",
+    "jsonwebtoken": "^9.0.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/jest": "^29.2.5",
+    "@types/jsonwebtoken": "^9.0.0",
     "@types/node": "^18.11.18",
     "@typescript-eslint/eslint-plugin": "^5.48.0",
     "@typescript-eslint/parser": "^5.48.0",

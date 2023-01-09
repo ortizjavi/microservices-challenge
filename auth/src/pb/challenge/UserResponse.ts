@@ -3,15 +3,19 @@
 import type { Long } from '@grpc/proto-loader';
 
 export interface UserResponse {
-  '_id'?: (string);
+  'id'?: (string);
   'email'?: (string);
   'dateCreated'?: (number | string | Long);
   'dateUpdated'?: (number | string | Long);
+  '_dateCreated'?: "dateCreated";
+  '_dateUpdated'?: "dateUpdated";
 }
 
 export interface UserResponse__Output {
-  '_id': (string);
+  'id': (string);
   'email': (string);
-  'dateCreated': (string);
-  'dateUpdated': (string);
+  'dateCreated'?: (string);
+  'dateUpdated'?: (string);
+  '_dateCreated': "dateCreated";
+  '_dateUpdated': "dateUpdated";
 }

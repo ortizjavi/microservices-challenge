@@ -12,14 +12,16 @@ export interface ProtoGrpcType {
   challenge: {
     AuthService: SubtypeConstructor<typeof grpc.Client, _challenge_AuthServiceClient> & { service: _challenge_AuthServiceDefinition }
     BusinessService: SubtypeConstructor<typeof grpc.Client, _challenge_BusinessServiceClient> & { service: _challenge_BusinessServiceDefinition }
-    GetUsersRequest: MessageTypeDefinition
     SignInInput: MessageTypeDefinition
     SignInOutput: MessageTypeDefinition
     SignUpInput: MessageTypeDefinition
     SignUpOutput: MessageTypeDefinition
+    UserRequest: MessageTypeDefinition
     UserResponse: MessageTypeDefinition
     UsersListRequest: MessageTypeDefinition
     UsersListResponse: MessageTypeDefinition
+    VerifyUserRequest: MessageTypeDefinition
+    VerifyUserResponse: MessageTypeDefinition
   }
 }
 
