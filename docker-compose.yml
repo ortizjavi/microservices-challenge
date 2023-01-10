@@ -9,22 +9,62 @@ services:
     environment:
       - "DATABASE_URL=mongodb://root:password@db/challengedb?authSource=admin&ssl=false&connectTimeoutMS=5000&maxPoolSize=50"
       - "PORT=3000"
+    networks:
+      - mongo-network
+      - api-network
     depends_on:
       - db
     links:
       - db
     ports:
-      - "3001:3000"
+      # - "3001:3000"
       - "5555:5555"
     volumes:
       - ./auth/src:/usr/src/service/auth/src:rw
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    container_name: api-container
+    env_file: api/.env.local
+    environment:
+      - "PORT=3000"
+    networks:
+      - api-network
+    depends_on:
+      - auth-service
+    links:
+      - auth-service
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./api/src:/usr/src/service/api/src:rw
   db:
     image: mongo
     container_name: mongo-container
+    networks:
+      - mongo-network
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=password
       - MONGO_INITDB_DATABASE=challengedb
     volumes:
       - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
-
+      - ./mongo-security:/mongo-security:rw
+    restart: always
+    healthcheck:
+      test: test $$(echo "rs.initiate().ok || rs.status().ok" | mongo -u root -p password --quiet) -eq 1
+      interval: 10s
+      start_period: 30s
+    entrypoint:
+            - bash
+            - -c
+            - |
+                chmod 400 /mongo-security/keyfile
+                chown 999:999 /mongo-security/keyfile
+                echo $$@
+                exec docker-entrypoint.sh $$@
+    command: "mongod --bind_ip_all --replSet replicaSet01 --keyFile /mongo-security/keyfile"
+networks:
+  mongo-network:
+  api-network:
