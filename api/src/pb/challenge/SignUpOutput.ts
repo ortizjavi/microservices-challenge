@@ -2,9 +2,9 @@
 
 
 export interface SignUpOutput {
-  'id'?: (string);
+  '_id'?: (string);
 }
 
 export interface SignUpOutput__Output {
-  'id': (string);
+  '_id': (string);
 }

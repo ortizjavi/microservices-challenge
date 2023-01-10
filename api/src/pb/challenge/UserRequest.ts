@@ -1,10 +1,10 @@
 // Original file: ../proto/main.proto
 
 
-export interface SignUpOutput {
+export interface UserRequest {
   'id'?: (string);
 }
 
-export interface SignUpOutput__Output {
+export interface UserRequest__Output {
   'id': (string);
 }

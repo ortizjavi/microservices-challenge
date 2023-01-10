@@ -29,7 +29,7 @@ message SignInInput {
 }
 
 message SignUpOutput {
-    required string _id = 1;
+    required string id = 1;
 }
 
 message SignInOutput {

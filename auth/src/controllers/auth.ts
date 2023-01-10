@@ -32,7 +32,7 @@ export const registerHandler = async (
     const user = await signUp(req.request.email, req.request.password);
 
     res(null, {
-      _id: user.id
+      id: user.id
     });
   } catch (error: unknown) {
     res(handleGrpcError(error));
