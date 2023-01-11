@@ -49,18 +49,18 @@ message UserRequest {
 }
 
 message UsersListRequest {
-    optional int32 result_per_page = 1 [default = 10];
-    optional int32 page = 2 [default = 1];
-    optional string email = 3;
+    optional int32 limit = 1 [default = 10];
+    optional int32 offset = 2 [default = 1];
 }
 
 message UsersListResponse {
     repeated UserResponse users = 1;
+    int32 total_count = 2;
 }
 
 message UserResponse {
     required string id = 1;
     required string email = 2;
-    optional int64 dateCreated = 3;
-    optional int64 dateUpdated = 4;
+    int64 created_at = 3;
+    int64 updated_at = 4;
 }
