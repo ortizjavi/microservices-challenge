@@ -18,11 +18,13 @@ const proto = grpc.loadPackageDefinition(packageDef);
 
 // host
 const AuthenticateHost = process.env.AuthHost || "localhost:3001";
-// const TodoHost = env.TodoHost || "localhost:3003";
+const BusinessHost = process.env.BusinessHost || "localhost:3002";
 
-const {AuthService}: any = proto.challenge;
+const {AuthService, BusinessService}: any = proto.challenge;
 
 export const authenticateService = new AuthService(
   AuthenticateHost,
   grpc.credentials.createInsecure()
 );
+
+export const businessService = new BusinessService(BusinessHost, grpc.credentials.createInsecure());
