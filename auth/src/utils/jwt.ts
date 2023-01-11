@@ -17,6 +17,6 @@ export const signJwt = (payload: JwtPayload, options: SignOptions = {}) => {
 
   return jwt.sign(payload, config.accessTokenPrivateKey, {
     ...options,
-    algorithm: "RS256"
+    algorithm: "HS256"
   });
 };

@@ -37,7 +37,7 @@ export const verifyUser = async (token: string) => {
   if (!user || !Object.is(user, Object)) {
     throw {
       code: grpc.status.PERMISSION_DENIED,
-      message: "Invalid email or password"
+      message: "Invalid or expired token"
     };
   }
 

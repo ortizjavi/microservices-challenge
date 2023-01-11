@@ -1,15 +1,14 @@
 import {Request, Response, NextFunction} from "express";
 
-import AuthenticateService from "../services/auth";
-
-const authenticateService = new AuthenticateService();
+import authenticateService from "../services/auth";
 
 export const login = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const body = authenticateService.login(req.body);
+    const body = await authenticateService.login(req.body);
 
     res.status(200).json(body);
   } catch (error) {
+    console.error(error);
     next(error);
   }
 };
@@ -20,6 +19,7 @@ export const signUp = async (req: Request, res: Response, next: NextFunction) =>
 
     res.status(200).json(body);
   } catch (error) {
-    return next(error);
+    console.error(error);
+    next(error);
   }
 };

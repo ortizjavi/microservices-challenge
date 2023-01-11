@@ -3,11 +3,13 @@ import {SignInOutput__Output} from "../pb/challenge/SignInOutput";
 import {SignUpInput__Output} from "../pb/challenge/SignUpInput";
 import {SignUpOutput__Output} from "../pb/challenge/SignUpOutput";
 import {GrpcError} from "../types/types/grpc";
+import {VerifyUserRequest__Output} from "../pb/challenge/VerifyUserRequest";
+import {VerifyUserResponse__Output} from "../pb/challenge/VerifyUserResponse";
 
 import {authenticateService} from "./proto";
 
-export default class AuthenticateService {
-  async login({email, password}: SignInInput__Output): Promise<SignInOutput__Output | GrpcError> {
+class AuthenticateService {
+  async login({email, password}: SignInInput__Output): Promise<SignInOutput__Output> {
     return new Promise((resolve, reject) => {
       authenticateService.signIn(
         {
@@ -42,4 +44,23 @@ export default class AuthenticateService {
       );
     });
   }
+
+  async verifyUser({access_token}: VerifyUserRequest__Output): Promise<VerifyUserResponse__Output> {
+    return new Promise((resolve, reject) => {
+      authenticateService.verifyUser(
+        {
+          access_token
+        },
+        (err: GrpcError, res: VerifyUserResponse__Output) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(res);
+          }
+        }
+      );
+    });
+  }
 }
+
+export default new AuthenticateService();
