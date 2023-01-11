@@ -48,6 +48,7 @@ export const verifyUser = async (
 
     res(null, user);
   } catch (error: unknown) {
+    console.error(error);
     res(handleGrpcError(error));
   }
 };

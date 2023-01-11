@@ -1,14 +1,14 @@
 import * as grpc from "@grpc/grpc-js";
 
 import {BusinessServiceHandlers} from "./pb/challenge/BusinessService";
-import authPackage from "./utils/proto";
+import protoPkg from "./utils/proto";
 import config from "./config";
 import connectDB from "./utils/prisma";
 import {listUsers, getUser} from "./controllers/user";
 
 const server = new grpc.Server();
 
-server.addService((authPackage.BussinessService as any).service, {
+server.addService((protoPkg.BusinessService as any).service, {
   listUsers: (req, res) => listUsers(req, res),
   getUser: (req, res) => getUser(req, res)
 } as BusinessServiceHandlers);

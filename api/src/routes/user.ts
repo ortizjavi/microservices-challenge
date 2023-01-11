@@ -1,5 +1,5 @@
 import express from "express";
-import {check} from "express-validator";
+import {check, header} from "express-validator";
 
 import {listUsers} from "../controllers/user";
 import authToken from "../middlewares/auth";
@@ -10,11 +10,12 @@ const router = express.Router();
 
 router.get(
   "/",
-  authToken,
   validate([
+    header("authorization", "Debes pasar un token de autenticación").notEmpty().contains("Bearer"),
     check("offset", "El offset debe ser númerico").optional({checkFalsy: true}).isNumeric(),
     check("limit", "El limit debe ser númerico").optional({checkFalsy: true}).isNumeric()
   ]),
+  authToken,
   listUsers,
   handleError
 );

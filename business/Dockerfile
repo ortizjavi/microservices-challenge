@@ -3,9 +3,9 @@ FROM node:19-alpine
 ENV SERVICE_PATH /usr/src/service
 
 ADD proto ${SERVICE_PATH}/proto
-ADD auth ${SERVICE_PATH}/auth
+ADD business ${SERVICE_PATH}/business
 
-WORKDIR ${SERVICE_PATH}/auth
+WORKDIR ${SERVICE_PATH}/business
 
 RUN npm ci
 

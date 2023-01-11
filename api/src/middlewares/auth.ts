@@ -3,12 +3,13 @@ import {Request, Response, NextFunction} from "express";
 import authenticateService from "../services/auth";
 
 export default async function authToken(
-  req: Request & {userId: string},
+  req: Request & {userId?: string},
   res: Response,
   next: NextFunction
 ) {
   try {
-    const response = await authenticateService.verifyUser({access_token: req.body.access_token});
+    const token = req.headers.authorization?.split(" ")[1];
+    const response = await authenticateService.verifyUser({access_token: token || ""});
 
     req.userId = response.id;
 

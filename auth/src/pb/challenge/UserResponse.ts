@@ -5,17 +5,13 @@ import type { Long } from '@grpc/proto-loader';
 export interface UserResponse {
   'id'?: (string);
   'email'?: (string);
-  'dateCreated'?: (number | string | Long);
-  'dateUpdated'?: (number | string | Long);
-  '_dateCreated'?: "dateCreated";
-  '_dateUpdated'?: "dateUpdated";
+  'created_at'?: (number | string | Long);
+  'updated_at'?: (number | string | Long);
 }
 
 export interface UserResponse__Output {
   'id': (string);
   'email': (string);
-  'dateCreated'?: (string);
-  'dateUpdated'?: (string);
-  '_dateCreated': "dateCreated";
-  '_dateUpdated': "dateUpdated";
+  'created_at': (string);
+  'updated_at': (string);
 }

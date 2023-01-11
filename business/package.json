@@ -1,7 +1,7 @@
 {
   "name": "auth",
   "version": "1.0.0",
-  "description": "Authentication Server with Node & Grpc",
+  "description": "Business Server with Node & Grpc",
   "main": "build/server.js",
   "scripts": {
     "build": "tsc",

@@ -2,7 +2,7 @@ import {SignInInput__Output} from "../pb/challenge/SignInInput";
 import {SignInOutput__Output} from "../pb/challenge/SignInOutput";
 import {SignUpInput__Output} from "../pb/challenge/SignUpInput";
 import {SignUpOutput__Output} from "../pb/challenge/SignUpOutput";
-import {GrpcError} from "../types/types/grpc";
+import {GrpcError} from "../types/grpc";
 import {VerifyUserRequest__Output} from "../pb/challenge/VerifyUserRequest";
 import {VerifyUserResponse__Output} from "../pb/challenge/VerifyUserResponse";
 

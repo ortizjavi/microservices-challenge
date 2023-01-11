@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import * as grpc from "@grpc/grpc-js";
+import {JwtPayload} from "jsonwebtoken";
 
 import {signJwt, verifyJwt} from "../utils/jwt";
 import {User} from "../types/user";
@@ -18,7 +19,7 @@ export const login = async (email: string, password: string): Promise<string> =>
   }
 
   // Create jwt
-  const access_token = signJwt(user);
+  const access_token = signJwt({id: user.id});
 
   return access_token;
 };
@@ -34,7 +35,7 @@ export const signUp = async (email: string, password: string) => {
 export const verifyUser = async (token: string) => {
   const user = verifyJwt(token);
 
-  if (!user || !Object.is(user, Object)) {
+  if (!user || !(user as JwtPayload).id) {
     throw {
       code: grpc.status.PERMISSION_DENIED,
       message: "Invalid or expired token"

@@ -14,8 +14,9 @@ export const listUsers = async (
 ) => {
   try {
     const {limit, offset} = req.request;
-    const result = await list(limit || config.defaultPaginationLimit, offset || 1);
+    const result = await list(limit || config.defaultPaginationLimit, offset || 0);
 
+    console.log(result);
     res(null, {
       ...result,
       users: result.users.map((user) => ({

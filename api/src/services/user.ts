@@ -7,7 +7,7 @@ import {businessService} from "./proto";
 class BusinessService {
   async listUsers({limit, offset}: UsersListRequest__Output): Promise<UsersListResponse__Output> {
     return new Promise((resolve, reject) => {
-      businessService.listUser(
+      businessService.listUsers(
         {
           limit,
           offset
