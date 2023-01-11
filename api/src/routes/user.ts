@@ -27,8 +27,8 @@ router.get(
   "/",
   validate([
     header("authorization", "Debes pasar un token de autenticación").notEmpty().contains("Bearer"),
-    check("offset", "El offset debe ser númerico").optional({checkFalsy: true}).isNumeric(),
-    check("limit", "El limit debe ser númerico").optional({checkFalsy: true}).isNumeric()
+    check("offset", "El offset debe ser númerico").optional({checkFalsy: true}).isInt({min: 0}),
+    check("limit", "El limit debe ser númerico").optional({checkFalsy: true}).isInt({min: 0})
   ]),
   authToken,
   listUsers,
