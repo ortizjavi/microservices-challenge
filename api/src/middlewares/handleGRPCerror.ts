@@ -11,7 +11,7 @@ export default function handleError(
 ) {
   const response = {} as GrpcError;
 
-  const {ALREADY_EXISTS, INVALID_ARGUMENT, INTERNAL, UNAVAILABLE} = grpc.status;
+  const {ALREADY_EXISTS, INVALID_ARGUMENT, INTERNAL, UNAVAILABLE, NOT_FOUND} = grpc.status;
 
   const err = error as GrpcError;
 
@@ -27,6 +27,10 @@ export default function handleError(
     case INTERNAL:
       response.code = 503;
       response.message = "We are working for a solution";
+      break;
+    case NOT_FOUND:
+      response.code = 204;
+      response.message = "";
       break;
     case UNAVAILABLE:
       response.code = 503;

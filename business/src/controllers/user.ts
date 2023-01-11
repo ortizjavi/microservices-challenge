@@ -1,6 +1,6 @@
 import * as grpc from "@grpc/grpc-js";
 
-import {list, findUserById} from "../services/user";
+import {list, findUserBy} from "../services/user";
 import {handleGrpcError} from "../utils/error";
 import {UsersListRequest__Output} from "../pb/challenge/UsersListRequest";
 import {UserResponse__Output} from "../pb/challenge/UserResponse";
@@ -16,7 +16,6 @@ export const listUsers = async (
     const {limit, offset} = req.request;
     const result = await list(limit || config.defaultPaginationLimit, offset || 0);
 
-    console.log(result);
     res(null, {
       ...result,
       users: result.users.map((user) => ({
@@ -35,7 +34,12 @@ export const getUser = async (
   res: grpc.sendUnaryData<UserResponse__Output>
 ) => {
   try {
-    const user = await findUserById(req.request.id);
+    let {email, id}: {email: string | undefined; id: string | undefined} = req.request;
+
+    email = email ? email : undefined;
+    id = id ? id : undefined;
+
+    const user = await findUserBy({email, id});
 
     res(null, {
       ...user,

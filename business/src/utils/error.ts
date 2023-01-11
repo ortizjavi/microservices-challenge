@@ -11,8 +11,11 @@ export const handleGrpcError = (error: unknown): GrpcError => {
     };
   }
 
-  if ((error as GrpcError).code === grpc.status.INVALID_ARGUMENT) {
-    return error as GrpcError;
+  switch ((error as GrpcError).code) {
+    case grpc.status.INVALID_ARGUMENT:
+      return error as GrpcError;
+    case grpc.status.NOT_FOUND:
+      return error as GrpcError;
   }
 
   return {
