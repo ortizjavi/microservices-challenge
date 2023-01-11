@@ -2,7 +2,7 @@
 
 This microservices project consists on 3 services, two of them private and the last one is the web API to communicate using HTTP.
 
-The three services uses GRPC to communicate lightweight, you can find the modeled messages on [proto](https://github.com/ortizjavi/microservices-challenge.git/proto) folder.
+The three services uses GRPC to communicate lightweight, you can find the modeled messages on [proto](https://github.com/ortizjavi/microservices-challenge/tree/main/proto) folder.
 ## Prerequisites
 
 To use these files, you must first have the following installed:
