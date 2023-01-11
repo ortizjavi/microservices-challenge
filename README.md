@@ -21,7 +21,7 @@ The following steps will run a local instance of the Microservices using the def
 ```bash
 git clone https://github.com/ortizjavi/microservices-challenge.git
 cd  microservices-challenge
-bash run.sj
+bash run.sh
 ```
 
 After the server has started, the API will listen on: [http://localhost:3000](http://localhost:3000).
