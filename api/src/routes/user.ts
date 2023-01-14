@@ -14,8 +14,10 @@ router.get(
     header("authorization", "Debes pasar un token de autenticación").notEmpty().contains("Bearer")
   ]),
   oneOf([
-    param("idOrEmail", "El correo está mal formado").isEmail(),
-    param("idOrEmail", "El id está vacio").not().isEmpty().isHexadecimal()
+    param("idOrEmail", "El correo no tiene el formato correcto").isEmail(),
+    param("idOrEmail", "El id no tiene el formato correcto")
+      .isHexadecimal()
+      .isLength({min: 24, max: 24})
   ]),
   handleOneOfMiddleWare,
   authToken,
